@@ -20,10 +20,17 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+LINKS = (
+    ('Pelican', 'http://getpelican.com/'),
+    ('Python.org', 'http://python.org/'),
+    ('Jinja2', 'http://jinja.pocoo.org/'),
+)
+
+ICONS = (
+    ('github', 'https://github.com/yktsr'),
+    ('rss', 'https://github.com/'),
+		('twitter', "https://twitter.com/kryptos_nv"),
+)
 
 # Social widget
 SOCIAL = (('You can add links in your config file', '#'),
@@ -35,15 +42,6 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 THEME = 'themes/pelican-alchemy/alchemy/'
 SITESUBTITLE = 'evermore!'
-DESCRIPTION = 'Security AI Artificial Intelligence'
-LINKS = (
-    ('Pelican', 'http://getpelican.com/'),
-    ('Python.org', 'http://python.org/'),
-    ('Jinja2', 'http://jinja.pocoo.org/'),
-)
+DESCRIPTION = 'Security AI blog'
+SITEIMAGE = '/images/icon.jpg width=200 height=200'
 
-ICONS = (
-    ('github', 'https://github.com/nairobilug/pelican-alchemy'),
-    ('rss', 'https://github.com/'),
-		('twitter', "https://twitter.com/kryptos_nv"),
-)
