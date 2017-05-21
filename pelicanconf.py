@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'yktsr'
 SITENAME = '電気羊と砂嵐の夢'
-SITEURL = 'https://yktsr.github.io'
+SITEURL = ''
 
 PATH = 'content'
 
@@ -13,7 +13,7 @@ TIMEZONE = 'Asia/Tokyo'
 DEFAULT_LANG = 'jp'
 
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = 'feeds/all.atom.xml'
+FEED_ALL_ATOM = None
 CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None

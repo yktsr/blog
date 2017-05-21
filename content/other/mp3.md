@@ -2,7 +2,6 @@ Title: Mp3のタグ情報をUTF-8にする
 Date: 2017-05-19 14:25
 Modified: 2017-05-19 14:25
 Tags: mp3, shell
-Category: tips, other
 Authors: yktsr
 Summary: Windows時代に作成したレガシーmp3ファイルがLinux環境で文字化けする。
 これをシェルで解決する話
