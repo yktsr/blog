@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'yktsr'
-SITENAME = '電気羊の夢をみる'
+SITENAME = '電気羊と砂嵐の夢'
 SITEURL = 'https://yktsr.github.io'
 
 PATH = 'content'
@@ -45,4 +45,5 @@ LINKS = (
 ICONS = (
     ('github', 'https://github.com/nairobilug/pelican-alchemy'),
     ('rss', 'https://github.com/'),
+		('twitter', "https://twitter.com/kryptos_nv"),
 )

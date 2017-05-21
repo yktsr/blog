@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊の夢をみる</title><link href="https://ytksr.github.io/" rel="alternate"></link><link href="https://ytksr.github.io/feeds/all.atom.xml" rel="self"></link><id>https://ytksr.github.io/</id><updated>2017-05-19T14:25:00+09:00</updated><entry><title>title</title><link href="https://ytksr.github.io/title.html" rel="alternate"></link><published>2017-05-19T14:25:00+09:00</published><updated>2017-05-19T14:25:00+09:00</updated><author><name>yktsr</name></author><id>tag:ytksr.github.io,2017-05-19:/title.html</id><summary type="html">&lt;p&gt;daitai&lt;/p&gt;</summary><content type="html">&lt;h1&gt;We are Evermore!&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊と砂嵐の夢</title><link href="https://yktsr.github.io/" rel="alternate"></link><link href="https://yktsr.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yktsr.github.io/</id><updated>2017-05-19T14:25:00+09:00</updated><entry><title>Mp3のタグ情報をUTF-8にする</title><link href="https://yktsr.github.io/mp3notaguqing-bao-woutf-8nisuru.html" rel="alternate"></link><published>2017-05-19T14:25:00+09:00</published><updated>2017-05-19T14:25:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-19:/mp3notaguqing-bao-woutf-8nisuru.html</id><summary type="html">&lt;p&gt;Windows時代に作成したレガシーmp3ファイルがLinux環境で文字化けする。&lt;/p&gt;</summary><content type="html">&lt;p&gt;これをシェルで解決する話&lt;/p&gt;
+&lt;h1&gt;We are Evermore!&lt;/h1&gt;
 &lt;h2&gt;test sample&lt;/h2&gt;
-&lt;p&gt;markdown&lt;/p&gt;</content><category term="tag1"></category><category term="tag2"></category></entry></feed>
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find `pwd` -type f -name &amp;quot;*.mp3&amp;quot; -print0 | xargs -0 mid3iconv -d -e CP932 --remove-v1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;markdon&lt;/p&gt;</content><category term="mp3"></category><category term="shell"></category></entry></feed>
