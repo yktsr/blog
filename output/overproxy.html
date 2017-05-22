@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+  <!-- Required meta tags always come first -->
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>Proxy設定まとめ | 電気羊と砂嵐の夢
+</title>
+  <link rel="canonical" href="https://yktsr.github.io/overproxy.html">
+
+  <link rel="alternate" type="application/atom+xml" href="https://yktsr.github.io/feeds/all.atom.xml" title="Full Atom Feed">
+  <link rel="alternate" type="application/atom+xml" href="https://yktsr.github.io/feeds/security.atom.xml" title="Categories Atom Feed">
+
+
+  <link rel="stylesheet" href="https://yktsr.github.io/theme/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://yktsr.github.io/theme/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://yktsr.github.io/theme/css/pygments/default.min.css">
+  <link rel="stylesheet" href="https://yktsr.github.io/theme/css/style.css">
+
+
+<meta name="description" content="ありとあらゆるProxyを超えてみる">
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4">
+          <a href="https://yktsr.github.io/">
+            <img class="img-fluid" src=https://yktsr.github.io/images/icon.jpg width=200 height=200 alt="電気羊と砂嵐の夢">
+          </a>
+        </div>
+        <div class="col-sm-8">
+          <h1 class="title"><a href="https://yktsr.github.io/">電気羊と砂嵐の夢</a></h1>
+          <p class="text-muted">evermore!</p>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="http://getpelican.com/" target="_blank">Pelican</a></li>
+            <li class="list-inline-item"><a href="http://python.org/" target="_blank">Python.org</a></li>
+            <li class="list-inline-item"><a href="http://jinja.pocoo.org/" target="_blank">Jinja2</a></li>
+            <li class=" list-inline-item text-muted">|</li>
+            <li class="list-inline-item"><a class="fa fa-github" href="https://github.com/yktsr" target="_blank"></a></li>
+            <li class="list-inline-item"><a class="fa fa-rss" href="https://github.com/" target="_blank"></a></li>
+            <li class="list-inline-item"><a class="fa fa-twitter" href="https://twitter.com/kryptos_nv" target="_blank"></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="container">
+      <h1>Proxy設定まとめ
+</h1>
+      <hr>
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2017-05-22T17:31:00+09:00">
+        <i class="fa fa-clock-o"></i>
+        Mon 22 May 2017
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-folder-open-o"></i>
+        <a href="https://yktsr.github.io/category/security.html">security</a>
+      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-user-o"></i>
+        <a href="https://yktsr.github.io/author/yktsr.html">yktsr</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="https://yktsr.github.io/tag/proxy.html">#proxy</a>,         <a href="https://yktsr.github.io/tag/security.html">#security</a>      </li>
+    </ul>
+  </header>
+  <div class="content">
+    <p>ご利用は自己責任で。</p>
+<p>Proxyはときに守ってくれるようで、時には爆発してほしいと思うこともある。</p>
+<p>仲良く付き合うためのtips</p>
+<h2>環境変数を解釈してくれる場合</h2>
+<div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://proxy-server:8080
+$ <span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://proxy-server:8080
+</pre></div>
+
+
+<h2>github</h2>
+<div class="highlight"><pre><span></span>$ git config --global http.proxy http://proxy-server:8000
+$ git config --global https.proxy http://proxy-server:8000
+</pre></div>
+
+
+<h2>wget</h2>
+<div class="highlight"><pre><span></span><span class="c1"># vim /etc/wgetrc</span>
+$ vim ~/.wgetrc
+</pre></div>
+
+
+<p>に以下を追加</p>
+<div class="highlight"><pre><span></span><span class="nv">http_proxy</span><span class="o">=</span>http://proxy-server:8000
+</pre></div>
+
+
+<h2>curl</h2>
+<div class="highlight"><pre><span></span>$ vim ~/.curlrc
+<span class="nv">proxy</span><span class="o">=</span>http://proxy-server:8000
+</pre></div>
+
+
+<h2>npm</h2>
+<div class="highlight"><pre><span></span>$ npm -g config <span class="nb">set</span> proxy http://proxy-server:8000
+$ npm -g config <span class="nb">set</span> https-proxy http://proxy-server:8000
+$ npm -g config <span class="nb">set</span> registry http://registry.npmjs.org/
+$ npm config list
+</pre></div>
+
+
+<h2>pip</h2>
+<p>設定ファイルでするやり方が分からなかったので, aliasでコマンドを上書きする.</p>
+<div class="highlight"><pre><span></span>$ vim ~/.bash_rc
+<span class="nb">alias</span> <span class="nv">pip3</span><span class="o">=</span><span class="s1">&#39;pip3 --proxy=proxy-server:8000&#39;</span>
+$ <span class="nb">source</span> ~/.bash_rc または $ . ~/.bash_rc
+</pre></div>
+
+
+<h2>ATOM</h2>
+<div class="highlight"><pre><span></span>$ apm config <span class="nb">set</span> https-proxy http://proxy-server:8000
+</pre></div>
+
+
+<h2>SSH</h2>
+<p>proxycommandなるものが用意されている。これは入力を標準入力から受け取り、出力を標準出力へ返すフィルタを指定する。
+ここに透過プロキシとして動作するコマンドを指定する。
+例えば、GithubへProxyを経由してSSH接続する場合（SSH over HTTPS）、
+次のように設定ファイルを指定する。</p>
+<div class="highlight"><pre><span></span>$ cat ~/.ssh/config
+Host github.com
+  HostName ssh.github.com
+  port 443
+  ProxyCommand ncat --proxy <span class="s2">&quot;proxy-server:8000&quot;</span> %h %p
+</pre></div>
+
+
+<p>ただし、</p>
+<div class="highlight"><pre><span></span><span class="c1"># apt install nc</span>
+</pre></div>
+
+
+<p>ここで用いるnetcat(nc, ncatなど)にはオリジナル版、nmap付属版など複数あるらしく、現在はnmapに付属しているものが高機能なようだ</p>
+<p>ここで、ncatはフィルタであるので、</p>
+<div class="highlight"><pre><span></span>$ <span class="nb">echo</span> <span class="s2">&quot;GET /&quot;</span> <span class="p">|</span> ncat --proxy proxy-server:8000 google.com 80
+HTTP/1.0 <span class="m">302</span> Found
+Cache-Control: private
+Content-Type: text/html<span class="p">;</span> <span class="nv">charset</span><span class="o">=</span>UTF-8
+Referrer-Policy: no-referrer
+Location: http://www.google.co.jp/?gfe_rd<span class="o">=</span>cr<span class="p">&amp;</span><span class="nv">ei</span><span class="o">=</span>
+Content-Length: 261
+Date: Mon, <span class="m">22</span> May <span class="m">2017</span> 08:49:27 GMT
+
+&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv<span class="o">=</span><span class="s2">&quot;content-type&quot;</span> <span class="nv">content</span><span class="o">=</span><span class="s2">&quot;text/html;charset=utf-8&quot;</span>&gt;
+&lt;TITLE&gt;302 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;H1&gt;302 Moved&lt;/H1&gt;
+The document has moved
+&lt;A <span class="nv">HREF</span><span class="o">=</span><span class="s2">&quot;http://www.google.co.jp/?gfe_rd=cr&amp;amp;ei=&quot;</span>&gt;here&lt;/A&gt;.
+&lt;/BODY&gt;&lt;/HTML&gt;
+</pre></div>
+
+
+<p>ということもできる。
+もし、標準入出力ですべての操作が行えるのであればこのような方法も可能だ。</p>
+<h2>これら以外で超える</h2>
+<p>まだ万策尽きてはない。
+<a href="https://github.com/rofl0r/proxychains-ng">proxychains-ng</a>で強引に超えてみる。
+proxychains-ngはネットワーク系のライブラリを置き換え、任意のコマンドでProxyを利用させる。</p>
+<div class="highlight"><pre><span></span>$ unzip proxychains-ng-master.zip
+$ ./configure
+$ make
+$ sudo make install
+
+$ sudo vi /etc/proxychains.conf
+strict_chain
+
+<span class="o">[</span>ProxyList<span class="o">]</span>
+http YOUR_PROXY_IP_ADDRESS PORT
+
+
+$ proxychains4 curl http://example.com/
+</pre></div>
+
+
+<p>例えば、SSHなら上のSSHの設定を行わなくとも</p>
+<div class="highlight"><pre><span></span>$ proxychains4 ssh -T github.com
+</pre></div>
+
+
+<p>で接続することができる。</p>
+<h2>もぅﾏﾁﾞ無理......浅漬けにしよ</h2>
+<p>これらでも回避できない場合、外のサーバを踏み台にする。
+SSHを使って外のサーバとVPNを構築し、VPNの中を通って外と通信させることを考える。
+<a href="http://www.unixuser.org/~euske/doc/openssh/book/chap6.html#real-vpn">参考にさせて頂いたサイト</a></p>
+<div class="highlight"><pre><span></span><span class="c1"># cat /root/.ssh/config</span>
+Host 192.168.1.128
+    Hostname            192.168.1.128
+    Tunnel              point-to-point
+    TunnelDevice        0:0
+    PermitLocalCommand  yes
+    LocalCommand        <span class="o">(</span> ifconfig tun0 192.168.3.2 pointopoint 192.168.3.1 <span class="o">)</span> <span class="p">&amp;</span>
+
+<span class="c1"># ssh root@192.168.1.128</span>
+<span class="c1"># ifconfig tun0 192.168.3.1 pointopoint 192.168.3.2</span>
+<span class="c1"># ifconfig</span>
+tun0      Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00  
+      inet addr:192.168.3.1  P-t-P:192.168.3.2  Mask:255.255.255.255
+      UP POINTOPOINT RUNNING NOARP MULTICAST  MTU:1500  Metric:1
+      RX packets:12 errors:0 dropped:10 overruns:0 frame:0
+      TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+      collisions:0 txqueuelen:500
+      RX bytes:1288 <span class="o">(</span>1.2 KB<span class="o">)</span>  TX bytes:0 <span class="o">(</span>0.0 B<span class="o">)</span>
+
+<span class="c1"># ping 192.168.3.2</span>
+</pre></div>
+
+
+<p>あとはルーティングとかなんやかんやを設定する。</p>
+<h3>参考</h3>
+<p><a href="http://www.unixuser.org/~euske/doc/openssh/book/appendix.html">入門OpenSSH 様</a>
+<br>SSHのありとあらゆる機能が書かれています</p>
+<p><a href="http://inaz2.hatenablog.com/entry/2014/08/20/004106">ももいろテクノロジー 様</a></p>
+  </div>
+</article>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+       <ul class="col-sm-6 list-inline">
+          <li class="list-inline-item"><a href="https://yktsr.github.io/authors.html">Authors</a></li>
+          <li class="list-inline-item"><a href="https://yktsr.github.io/archives.html">Archives</a></li>
+          <li class="list-inline-item"><a href="https://yktsr.github.io/categories.html">Categories</a></li>
+          <li class="list-inline-item"><a href="https://yktsr.github.io/tags.html">Tags</a></li>
+        </ul>
+        <p class="col-sm-6 text-sm-right text-muted">
+          Generated by <a href="https://github.com/getpelican/pelican" target="_blank">Pelican</a> / <a href="https://github.com/nairobilug/pelican-alchemy" target="_blank">&#x2728;</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

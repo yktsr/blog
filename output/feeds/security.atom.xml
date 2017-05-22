@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊と砂嵐の夢</title><link href="https://yktsr.github.io/" rel="alternate"></link><link href="https://yktsr.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yktsr.github.io/</id><updated>2017-05-22T17:31:00+09:00</updated><entry><title>Proxy設定まとめ</title><link href="https://yktsr.github.io/overproxy.html" rel="alternate"></link><published>2017-05-22T17:31:00+09:00</published><updated>2017-05-22T17:31:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-22:/overproxy.html</id><summary type="html">&lt;p&gt;ありとあらゆるProxyを超えてみる&lt;/p&gt;</summary><content type="html">&lt;p&gt;ご利用は自己責任で。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊と砂嵐の夢 - security</title><link href="https://yktsr.github.io/" rel="alternate"></link><link href="https://yktsr.github.io/feeds/security.atom.xml" rel="self"></link><id>https://yktsr.github.io/</id><updated>2017-05-22T17:31:00+09:00</updated><entry><title>Proxy設定まとめ</title><link href="https://yktsr.github.io/overproxy.html" rel="alternate"></link><published>2017-05-22T17:31:00+09:00</published><updated>2017-05-22T17:31:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-22:/overproxy.html</id><summary type="html">&lt;p&gt;ありとあらゆるProxyを超えてみる&lt;/p&gt;</summary><content type="html">&lt;p&gt;ご利用は自己責任で。&lt;/p&gt;
 &lt;p&gt;Proxyはときに守ってくれるようで、時には爆発してほしいと思うこともある。&lt;/p&gt;
 &lt;p&gt;仲良く付き合うためのtips&lt;/p&gt;
 &lt;h2&gt;環境変数を解釈してくれる場合&lt;/h2&gt;
@@ -149,33 +149,4 @@ tun0      Link encap:UNSPEC  HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00
 &lt;h3&gt;参考&lt;/h3&gt;
 &lt;p&gt;&lt;a href="http://www.unixuser.org/~euske/doc/openssh/book/appendix.html"&gt;入門OpenSSH 様&lt;/a&gt;
 &lt;br&gt;SSHのありとあらゆる機能が書かれています&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://inaz2.hatenablog.com/entry/2014/08/20/004106"&gt;ももいろテクノロジー 様&lt;/a&gt;&lt;/p&gt;</content><category term="proxy"></category><category term="security"></category></entry><entry><title>Pelican文法など</title><link href="https://yktsr.github.io/pelican.html" rel="alternate"></link><published>2017-05-22T17:31:00+09:00</published><updated>2017-05-22T17:31:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-22:/pelican.html</id><summary type="html">&lt;p&gt;ありとあらゆるProxyを超えてみる&lt;/p&gt;</summary><content type="html">&lt;p&gt;This is text such as &lt;code&gt;this&lt;/code&gt; that is normally...&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# python code  
-mystr = &amp;#39;Hello world&amp;#39;  
-print(&amp;#39;%s&amp;#39;%(mystr))  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="ch"&gt;#! python code  &lt;/span&gt;
-&lt;span class="n"&gt;mystr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Hello world&amp;#39;&lt;/span&gt;  
-&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mystr&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# echo test&lt;/span&gt;
-aaa
-
-&lt;span class="c1"&gt;# echo test&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;.. code-block:: python&lt;/p&gt;
-&lt;p&gt;print("Pelican is a static site generator.")&lt;/p&gt;
-&lt;h1&gt;H1&lt;/h1&gt;
-&lt;h1&gt;H1&lt;/h1&gt;
-&lt;h2&gt;H2&lt;/h2&gt;
-&lt;h2&gt;H2&lt;/h2&gt;
-&lt;h3&gt;H3&lt;/h3&gt;</content><category term="proxy"></category><category term="security"></category></entry><entry><title>Mp3のタグ情報をUTF-8にする</title><link href="https://yktsr.github.io/mp3tag2UTF8.html" rel="alternate"></link><published>2017-05-19T14:25:00+09:00</published><updated>2017-05-19T14:25:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-19:/mp3tag2UTF8.html</id><summary type="html">&lt;p&gt;Windows時代に作成したレガシーmp3ファイルがLinux環境で文字化けする。コマンドラインだけでなんとか解決する&lt;/p&gt;</summary><content type="html">&lt;h1&gt;シンプルに&lt;/h1&gt;
-&lt;p&gt;mid3iconvをインストールして&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;find `pwd` -type f -name &amp;quot;*.mp3&amp;quot; -print0 | xargs -0 mid3iconv -d -e CP932 --remove-v1
-&lt;/pre&gt;&lt;/div&gt;</content><category term="mp3"></category><category term="shell"></category></entry></feed>
+&lt;p&gt;&lt;a href="http://inaz2.hatenablog.com/entry/2014/08/20/004106"&gt;ももいろテクノロジー 様&lt;/a&gt;&lt;/p&gt;</content><category term="proxy"></category><category term="security"></category></entry></feed>
