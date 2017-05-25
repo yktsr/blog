@@ -7,9 +7,9 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>security Articles | 電気羊と砂嵐の夢
+  <title>USBプロトコル解析 | 電気羊と砂嵐の夢
 </title>
-  <link rel="canonical" href="https://yktsr.github.io/category/security.html">
+  <link rel="canonical" href="https://yktsr.github.io/usb-protocol-analyzer.html">
 
   <link rel="alternate" type="application/atom+xml" href="https://yktsr.github.io/feeds/all.atom.xml" title="Full Atom Feed">
   <link rel="alternate" type="application/atom+xml" href="https://yktsr.github.io/feeds/security.atom.xml" title="Categories Atom Feed">
@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="https://yktsr.github.io/theme/css/style.css">
 
 
-<meta name="description" content="Security AI blog">
+<meta name="description" content="Virtual USB AnalyzerとVMwareを利用し、仮想USBからパケットを解析する">
 </head>
 
 <body>
@@ -52,54 +52,71 @@
 
   <div class="main">
     <div class="container">
-      <h1>security Articles
+      <h1>USBプロトコル解析
 </h1>
       <hr>
-<article class="row teaser">
-  <header class="col-sm-4 text-muted">
-    <ul>
-      <li title="2017-05-24T18:16:00+09:00">
+<article class="article">
+  <header>
+    <ul class="list-inline">
+      <li class="list-inline-item text-muted" title="2017-05-24T18:16:00+09:00">
         <i class="fa fa-clock-o"></i>
         Wed 24 May 2017
       </li>
-      <li>
+      <li class="list-inline-item">
         <i class="fa fa-folder-open-o"></i>
         <a href="https://yktsr.github.io/category/security.html">security</a>
       </li>
-      <li>
+      <li class="list-inline-item">
         <i class="fa fa-user-o"></i>
         <a href="https://yktsr.github.io/author/yktsr.html">yktsr</a>      </li>
+      <li class="list-inline-item">
+        <i class="fa fa-files-o"></i>
+        <a href="https://yktsr.github.io/tag/security.html">#security</a>,         <a href="https://yktsr.github.io/tag/usb.html">#usb</a>,         <a href="https://yktsr.github.io/tag/protocol.html">#protocol</a>      </li>
     </ul>
   </header>
-  <div class="col-sm-8">
-    <h4 class="title"><a href="https://yktsr.github.io/usb-protocol-analyzer.html">USBプロトコル解析</a></h4>
-    <div class="content">
-      Virtual USB AnalyzerとVMwareを利用し、仮想USBからパケットを解析する
-    </div>
-  </div>
-</article>
-<hr>
-<article class="row teaser">
-  <header class="col-sm-4 text-muted">
-    <ul>
-      <li title="2017-05-22T17:31:00+09:00">
-        <i class="fa fa-clock-o"></i>
-        Mon 22 May 2017
-      </li>
-      <li>
-        <i class="fa fa-folder-open-o"></i>
-        <a href="https://yktsr.github.io/category/security.html">security</a>
-      </li>
-      <li>
-        <i class="fa fa-user-o"></i>
-        <a href="https://yktsr.github.io/author/yktsr.html">yktsr</a>      </li>
-    </ul>
-  </header>
-  <div class="col-sm-8">
-    <h4 class="title"><a href="https://yktsr.github.io/overproxy.html">Proxy設定まとめ</a></h4>
-    <div class="content">
-      ありとあらゆるProxyを超えてみる
-    </div>
+  <div class="content">
+    <p>シリアル通信を開始したものの、なぜか繋がらない。断線しているのか？
+USBプロトコル・アナライザなんて高価なものは持ってないし、
+確かめようにもオシロスコープは手元にないし、グランドがどの端子なのかもわからないし..... (´-ω-`) </p>
+<p>なんとかならないか......
+<a href="http://vusb-analyzer.sourceforge.net/">Virtual Usb Analyzer</a>などという神ツールを発見。早速やってみる</p>
+<ol>
+<li>
+<p><a href="http://www.vmware.com/products/player/playerpro-evaluation.html">VMware</a>を拾ってきてインストール</p>
+</li>
+<li>
+<p>VMwareに適当なOS(Ubuntuなど）をインストール</p>
+</li>
+<li>
+<p>ホスト側PCで</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span>sudo apt install vusb-analyzer
+</pre></div>
+
+
+<ol>
+<li>VMwareのゲストOSがインストールされているフォルダ内、vmxファイルに以下を追記する</li>
+</ol>
+<div class="highlight"><pre><span></span>   monitor = &quot;debug&quot;
+   usb.analyzer.enable = TRUE
+   usb.analyzer.maxLine = 8192
+   mouse.vusb.enable = FALSE
+</pre></div>
+
+
+<ol>
+<li>シリアル通信を開始</li>
+<li>VMwareのゲストOSがインストールされているフォルダ内、vmware.logにUSBのログが吐き出される</li>
+</ol>
+<div class="highlight"><pre><span></span>grep USBIO vmware.log &gt; vmware-usb.log
+</pre></div>
+
+
+<ol>
+<li>vusb-analyzer vmware-usb.log</li>
+</ol>
+<p>VM使わなくても、Wiresharkでできたのか...</p>
   </div>
 </article>
     </div>

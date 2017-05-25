@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊と砂嵐の夢</title><link href="https://yktsr.github.io/" rel="alternate"></link><link href="https://yktsr.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yktsr.github.io/</id><updated>2017-05-22T17:31:00+09:00</updated><entry><title>Proxy設定まとめ</title><link href="https://yktsr.github.io/overproxy.html" rel="alternate"></link><published>2017-05-22T17:31:00+09:00</published><updated>2017-05-22T17:31:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-22:/overproxy.html</id><summary type="html">&lt;p&gt;ありとあらゆるProxyを超えてみる&lt;/p&gt;</summary><content type="html">&lt;p&gt;ご利用は自己責任で。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊と砂嵐の夢</title><link href="https://yktsr.github.io/" rel="alternate"></link><link href="https://yktsr.github.io/feeds/all.atom.xml" rel="self"></link><id>https://yktsr.github.io/</id><updated>2017-05-24T18:16:00+09:00</updated><entry><title>USBプロトコル解析</title><link href="https://yktsr.github.io/usb-protocol-analyzer.html" rel="alternate"></link><published>2017-05-24T18:16:00+09:00</published><updated>2017-05-24T18:16:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-24:/usb-protocol-analyzer.html</id><summary type="html">&lt;p&gt;Virtual USB AnalyzerとVMwareを利用し、仮想USBからパケットを解析する&lt;/p&gt;</summary><content type="html">&lt;p&gt;シリアル通信を開始したものの、なぜか繋がらない。断線しているのか？
+USBプロトコル・アナライザなんて高価なものは持ってないし、
+確かめようにもオシロスコープは手元にないし、グランドがどの端子なのかもわからないし..... (´-ω-`) &lt;/p&gt;
+&lt;p&gt;なんとかならないか......
+&lt;a href="http://vusb-analyzer.sourceforge.net/"&gt;Virtual Usb Analyzer&lt;/a&gt;などという神ツールを発見。早速やってみる&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.vmware.com/products/player/playerpro-evaluation.html"&gt;VMware&lt;/a&gt;を拾ってきてインストール&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VMwareに適当なOS(Ubuntuなど）をインストール&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ホスト側PCで&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install vusb-analyzer
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;VMwareのゲストOSがインストールされているフォルダ内、vmxファイルに以下を追記する&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;   monitor = &amp;quot;debug&amp;quot;
+   usb.analyzer.enable = TRUE
+   usb.analyzer.maxLine = 8192
+   mouse.vusb.enable = FALSE
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;シリアル通信を開始&lt;/li&gt;
+&lt;li&gt;VMwareのゲストOSがインストールされているフォルダ内、vmware.logにUSBのログが吐き出される&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grep USBIO vmware.log &amp;gt; vmware-usb.log
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;vusb-analyzer vmware-usb.log&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;VM使わなくても、Wiresharkでできたのか...&lt;/p&gt;</content><category term="security"></category><category term="usb"></category><category term="protocol"></category></entry><entry><title>Proxy設定まとめ</title><link href="https://yktsr.github.io/overproxy.html" rel="alternate"></link><published>2017-05-22T17:31:00+09:00</published><updated>2017-05-22T17:31:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-22:/overproxy.html</id><summary type="html">&lt;p&gt;ありとあらゆるProxyを超えてみる&lt;/p&gt;</summary><content type="html">&lt;p&gt;ご利用は自己責任で。&lt;/p&gt;
 &lt;p&gt;Proxyはときに守ってくれるようで、時には爆発してほしいと思うこともある。&lt;/p&gt;
 &lt;p&gt;仲良く付き合うためのtips&lt;/p&gt;
 &lt;h2&gt;環境変数を解釈してくれる場合&lt;/h2&gt;
