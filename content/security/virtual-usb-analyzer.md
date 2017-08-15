@@ -1,6 +1,6 @@
 Title: USBプロトコル解析
 Date: 2017-05-24 18:16
-Modified: 2017-05-24 18:16
+Modified: 2017-06-23 12:03
 Slug: usb-protocol-analyzer
 Tags: security, usb, protocol
 Authors: yktsr
@@ -20,7 +20,7 @@ USBプロトコル・アナライザなんて高価なものは持ってない�
 
 1. ホスト側PCで
 ```
-sudo apt install vusb-analyzer
+$ sudo apt install vusb-analyzer
 ```
 1. VMwareのゲストOSがインストールされているフォルダ内、vmxファイルに以下を追記する
 ```
@@ -33,9 +33,9 @@ sudo apt install vusb-analyzer
 1. シリアル通信を開始
 1. VMwareのゲストOSがインストールされているフォルダ内、vmware.logにUSBのログが吐き出される
 ```
-grep USBIO vmware.log > vmware-usb.log
+$ grep USBIO vmware.log > vmware-usb.log
+$ vusb-analyzer vmware-usb.log
 ```
-1. vusb-analyzer vmware-usb.log
 
 
 VM使わなくても、Wiresharkでできたのか...

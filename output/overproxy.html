@@ -79,11 +79,12 @@
 <p>Proxyはときに守ってくれるようで、時には爆発してほしいと思うこともある。</p>
 <p>仲良く付き合うためのtips</p>
 <h2>環境変数を解釈してくれる場合</h2>
-<div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>http://proxy-server:8080
-$ <span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>http://proxy-server:8080
+<div class="highlight"><pre><span></span>$ <span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span>proxy-server:8080
+$ <span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span>proxy-server:8080
 </pre></div>
 
 
+<p>http://を入れると、正しく解釈してくれるツールとしてくれないツールがある。</p>
 <h2>github</h2>
 <div class="highlight"><pre><span></span>$ git config --global http.proxy http://proxy-server:8000
 $ git config --global https.proxy http://proxy-server:8000

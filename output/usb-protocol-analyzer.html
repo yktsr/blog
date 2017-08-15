@@ -91,7 +91,7 @@ USBプロトコル・アナライザなんて高価なものは持ってない�
 <p>ホスト側PCで</p>
 </li>
 </ol>
-<div class="highlight"><pre><span></span>sudo apt install vusb-analyzer
+<div class="highlight"><pre><span></span>$ sudo apt install vusb-analyzer
 </pre></div>
 
 
@@ -109,13 +109,11 @@ USBプロトコル・アナライザなんて高価なものは持ってない�
 <li>シリアル通信を開始</li>
 <li>VMwareのゲストOSがインストールされているフォルダ内、vmware.logにUSBのログが吐き出される</li>
 </ol>
-<div class="highlight"><pre><span></span>grep USBIO vmware.log &gt; vmware-usb.log
+<div class="highlight"><pre><span></span>$ grep USBIO vmware.log &gt; vmware-usb.log
+$ vusb-analyzer vmware-usb.log
 </pre></div>
 
 
-<ol>
-<li>vusb-analyzer vmware-usb.log</li>
-</ol>
 <p>VM使わなくても、Wiresharkでできたのか...</p>
   </div>
 </article>

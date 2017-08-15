@@ -14,9 +14,11 @@ Proxyはときに守ってくれるようで、時には爆発してほしいと
 
 ## 環境変数を解釈してくれる場合
 ```shell
-$ export http_proxy=http://proxy-server:8080
-$ export https_proxy=http://proxy-server:8080
+$ export http_proxy=proxy-server:8080
+$ export https_proxy=proxy-server:8080
 ```
+http://を入れると、正しく解釈してくれるツールとしてくれないツールがある。
+
 
 ## github
 ```shell

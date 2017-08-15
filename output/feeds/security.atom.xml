@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊と砂嵐の夢 - security</title><link href="https://yktsr.github.io/" rel="alternate"></link><link href="https://yktsr.github.io/feeds/security.atom.xml" rel="self"></link><id>https://yktsr.github.io/</id><updated>2017-05-24T18:16:00+09:00</updated><entry><title>USBプロトコル解析</title><link href="https://yktsr.github.io/usb-protocol-analyzer.html" rel="alternate"></link><published>2017-05-24T18:16:00+09:00</published><updated>2017-05-24T18:16:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-24:/usb-protocol-analyzer.html</id><summary type="html">&lt;p&gt;Virtual USB AnalyzerとVMwareを利用し、仮想USBからパケットを解析する&lt;/p&gt;</summary><content type="html">&lt;p&gt;シリアル通信を開始したものの、なぜか繋がらない。断線しているのか？
+<feed xmlns="http://www.w3.org/2005/Atom"><title>電気羊と砂嵐の夢 - security</title><link href="https://yktsr.github.io/" rel="alternate"></link><link href="https://yktsr.github.io/feeds/security.atom.xml" rel="self"></link><id>https://yktsr.github.io/</id><updated>2017-06-23T12:03:00+09:00</updated><entry><title>sslsplit使い方</title><link href="https://yktsr.github.io/sslsplit.html" rel="alternate"></link><published>2017-06-23T11:06:00+09:00</published><updated>2017-06-23T11:06:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-06-23:/sslsplit.html</id><summary type="html">&lt;p&gt;sslsplitはSSL/TLSのMan In The Middleテストを行う際に用いるツールである。有名なmitmproxyに比べ、HTTPSだけでなく、あらゆるX over SSL/TLSに用いることができる。しかし、日本語の情報が圧倒的に不足しているので紹介&lt;/p&gt;</summary><content type="html">&lt;h1&gt;sslsplitとは&lt;/h1&gt;
+&lt;p&gt;中間者攻撃を行い、テスト対象機器が正しく証明書を検証しているか確認するツール。
+昨今はスマートフォン向けアプリなどで証明書検証不備が多数報告されている。
+有名なmitmproxyは、プロトコルをHTTP前提としているが、sslsplitはX over SSL/TLSに幅広く使える。&lt;/p&gt;
+&lt;p&gt;（正確にはmitmproxyでも証明書の交換手順に関してテストすることは可能であるが、
+証明書が交換されたあとの通信をうまく扱うことができない）&lt;/p&gt;
+&lt;h1&gt;インストール&lt;/h1&gt;
+&lt;p&gt;Kali Linuxはインストール済み。Ubuntuはapt経由でインストール可能。
+Debianはstretchとbusterで提供されているが、手元の環境では正常に動作しなかった。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo aptitude install sslsplit
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;使い方&lt;/h1&gt;
+&lt;h2&gt;環境&lt;/h2&gt;
+&lt;p&gt;Kali Linux on Virtual Boxで行った。
+Kali Linuxをルーター化済み。&lt;/p&gt;
+&lt;h2&gt;準備&lt;/h2&gt;
+&lt;p&gt;証明局証明書の作成。manに書いてあるとおり。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;$cat&lt;/span&gt; &amp;gt;x509v3ca.cnf &lt;span class="s"&gt;&amp;lt;&amp;lt;&amp;#39;EOF&amp;#39;&lt;/span&gt;
+&lt;span class="s"&gt;  [ req ]&lt;/span&gt;
+&lt;span class="s"&gt;  distinguished_name = reqdn&lt;/span&gt;
+
+&lt;span class="s"&gt;  [ reqdn ]&lt;/span&gt;
+
+&lt;span class="s"&gt;  [ v3_ca ]&lt;/span&gt;
+&lt;span class="s"&gt;  basicConstraints        = CA:TRUE&lt;/span&gt;
+&lt;span class="s"&gt;  subjectKeyIdentifier    = hash&lt;/span&gt;
+&lt;span class="s"&gt;  authorityKeyIdentifier  = keyid:always,issuer:always&lt;/span&gt;
+&lt;span class="s"&gt;  EOF&lt;/span&gt;
+
+$ openssl genrsa -out ca.key 2048
+$ openssl req -new -nodes -x509 -sha256 -out ca.crt -key ca.key &lt;span class="se"&gt;\&lt;/span&gt;
+           -config x509v3ca.cnf -extensions v3_ca &lt;span class="se"&gt;\&lt;/span&gt;
+           -subj &lt;span class="s1"&gt;&amp;#39;/O=SSLsplit Root CA/CN=SSLsplit Root CA/&amp;#39;&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+           -set_serial &lt;span class="m"&gt;0&lt;/span&gt; -days 3650
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;HTTPとHTTPSの例&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-ports 10080&lt;/span&gt;
+&lt;span class="c1"&gt;# iptables -t nat -A PREROUTING -p tcp --destination-port 443 -j REDIRECT --to-ports 10443&lt;/span&gt;
+
+$ sslsplit -D -k ca.key -c ca.crt -l connect.log -L sample.log https 0.0.0.0 &lt;span class="m"&gt;10443&lt;/span&gt; http 0.0.0.0 10080
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;これは、&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mitmproxy -e -T -p 10443
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;と同等。&lt;/p&gt;
+&lt;h2&gt;SMTPの例&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# iptables -t nat -A PREROUTING -p tcp --destination-port 465 -j REDIRECT --to-ports 10465&lt;/span&gt;
+$ sslsplit -D -k ca.key -c ca.crt -l connect.log -L sample.log ssl 0.0.0.0 10456
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;テスト環境動作確認を行うには以下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ openssl s_client -connect smtp.gmail.com:465 -showcerts
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;&lt;/h2&gt;
+&lt;p&gt;間違い、ご意見などなどありましたら、twitterでお寄せください。&lt;/p&gt;</content><category term="sslsplit"></category><category term="security"></category></entry><entry><title>USBプロトコル解析</title><link href="https://yktsr.github.io/usb-protocol-analyzer.html" rel="alternate"></link><published>2017-05-24T18:16:00+09:00</published><updated>2017-06-23T12:03:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-24:/usb-protocol-analyzer.html</id><summary type="html">&lt;p&gt;Virtual USB AnalyzerとVMwareを利用し、仮想USBからパケットを解析する&lt;/p&gt;</summary><content type="html">&lt;p&gt;シリアル通信を開始したものの、なぜか繋がらない。断線しているのか？
 USBプロトコル・アナライザなんて高価なものは持ってないし、
 確かめようにもオシロスコープは手元にないし、グランドがどの端子なのかもわからないし..... (´-ω-`) &lt;/p&gt;
 &lt;p&gt;なんとかならないか......
@@ -15,7 +80,7 @@ USBプロトコル・アナライザなんて高価なものは持ってない�
 &lt;p&gt;ホスト側PCで&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt install vusb-analyzer
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt install vusb-analyzer
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -33,22 +98,21 @@ USBプロトコル・アナライザなんて高価なものは持ってない�
 &lt;li&gt;シリアル通信を開始&lt;/li&gt;
 &lt;li&gt;VMwareのゲストOSがインストールされているフォルダ内、vmware.logにUSBのログが吐き出される&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;grep USBIO vmware.log &amp;gt; vmware-usb.log
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ grep USBIO vmware.log &amp;gt; vmware-usb.log
+$ vusb-analyzer vmware-usb.log
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;ol&gt;
-&lt;li&gt;vusb-analyzer vmware-usb.log&lt;/li&gt;
-&lt;/ol&gt;
 &lt;p&gt;VM使わなくても、Wiresharkでできたのか...&lt;/p&gt;</content><category term="security"></category><category term="usb"></category><category term="protocol"></category></entry><entry><title>Proxy設定まとめ</title><link href="https://yktsr.github.io/overproxy.html" rel="alternate"></link><published>2017-05-22T17:31:00+09:00</published><updated>2017-05-22T17:31:00+09:00</updated><author><name>yktsr</name></author><id>tag:yktsr.github.io,2017-05-22:/overproxy.html</id><summary type="html">&lt;p&gt;ありとあらゆるProxyを超えてみる&lt;/p&gt;</summary><content type="html">&lt;p&gt;ご利用は自己責任で。&lt;/p&gt;
 &lt;p&gt;Proxyはときに守ってくれるようで、時には爆発してほしいと思うこともある。&lt;/p&gt;
 &lt;p&gt;仲良く付き合うためのtips&lt;/p&gt;
 &lt;h2&gt;環境変数を解釈してくれる場合&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://proxy-server:8080
-$ &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;http://proxy-server:8080
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;proxy-server:8080
+$ &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;proxy-server:8080
 &lt;/pre&gt;&lt;/div&gt;
 
 
+&lt;p&gt;http://を入れると、正しく解釈してくれるツールとしてくれないツールがある。&lt;/p&gt;
 &lt;h2&gt;github&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git config --global http.proxy http://proxy-server:8000
 $ git config --global https.proxy http://proxy-server:8000
